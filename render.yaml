@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: gmail-collector
+    runtime: node
+    region: singapore
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production

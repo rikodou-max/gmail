@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Data file (akan dibuat otomatis di server)
+server/data.json
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
