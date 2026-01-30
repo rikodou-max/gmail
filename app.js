@@ -92,21 +92,21 @@ function getStats() {
 }
 
 function updateHomeStats() {
+    // Base numbers for social proof
+    const BASE_ACCOUNTS = 1500;
+    const BASE_CONTRIBUTORS = 50;
+    
     const stats = getStats();
     const totalAccountsEl = document.getElementById('total-accounts');
     const totalContributorsEl = document.getElementById('total-contributors');
 
     if (totalAccountsEl) {
-        totalAccountsEl.textContent = stats.totalAccounts;
+        totalAccountsEl.textContent = stats.totalAccounts + BASE_ACCOUNTS;
     }
     if (totalContributorsEl) {
-        totalContributorsEl.textContent = stats.totalContributors;
+        totalContributorsEl.textContent = stats.totalContributors + BASE_CONTRIBUTORS;
     }
 }
-
-// ================================
-// Toast Notifications
-// ================================
 function showToast(message, type = 'success') {
     let container = document.querySelector('.toast-container');
     if (!container) {
@@ -373,3 +373,4 @@ document.addEventListener('DOMContentLoaded', function () {
     // Init admin page
     initAdminPage();
 });
+
