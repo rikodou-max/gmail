@@ -1,72 +1,38 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Setor Akun - Gmail Collector</title>
+    <title>Order Closed - Gmail Collector</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-
 <body>
     <div class="background-effects">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
         <div class="blob blob-3"></div>
     </div>
-
     <nav class="navbar">
         <a href="index.html" class="nav-brand">
             <span class="brand-icon">📧</span>
             <span class="brand-text">Gmail Collector</span>
         </a>
     </nav>
-
     <main class="container">
         <div class="form-container">
-            <div class="form-card">
-                <h2 class="form-title">📤 Setor Akun Gmail</h2>
-                <p class="form-subtitle">Isi data di bawah untuk menyetor akun yang sudah kamu buat</p>
-
-                <form id="submit-form">
-                    <div class="form-group">
-                        <label for="name">Nama Kamu</label>
-                        <input type="text" id="name" placeholder="Masukkan nama kamu" required>
-                        <span class="error"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email Gmail yang Dibuat</label>
-                        <input type="email" id="email" placeholder="contoh@gmail.com" required>
-                        <span class="hint">Pastikan password akun ini: <strong>Pemabukgoogle2026</strong></span>
-                        <span class="error"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="wallet">Nomor E-Wallet untuk Pembayaran</label>
-                        <input type="text" id="wallet" placeholder="Nomor OVO/GoPay/DANA/dll" required>
-                        <span class="hint">Atau tulis "Cash" jika ingin bayaran tunai</span>
-                        <span class="error"></span>
-                    </div>
-
-                    <button type="submit" class="submit-btn">Setor Akun 🚀</button>
-                </form>
-
-                <div class="success-message">
-                    <div class="success-icon">🎉</div>
-                    <h3>Berhasil!</h3>
-                    <p>Akun kamu sudah disetor dan sedang menunggu verifikasi. Pembayaran akan dikirim setelah
-                        diverifikasi.</p>
-                    <a href="submit.html" class="cta-button secondary" onclick="location.reload()">Setor Akun Lagi</a>
+            <div class="form-card" style="text-align: center;">
+                <div style="font-size: 64px; margin-bottom: 16px;">🔒</div>
+                <h2 class="form-title">ORDER CLOSED</h2>
+                <p class="form-subtitle" style="margin-bottom: 24px;">Maaf, kuota sudah penuh!<br>Terima kasih sudah berkontribusi. 🎉</p>
+                <div style="background: rgba(34,197,94,0.2); border: 1px solid #22c55e; border-radius: 12px; padding: 16px; margin-bottom: 24px;">
+                    <div style="font-size: 28px; font-weight: bold; color: #22c55e;">1500+ Akun</div>
+                    <div style="color: #888;">Berhasil Terkumpul!</div>
                 </div>
-
                 <a href="index.html" class="back-link">← Kembali ke Beranda</a>
             </div>
         </div>
     </main>
-
     <script src="app.js"></script>
 </body>
-
 </html>
