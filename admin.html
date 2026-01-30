@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +7,12 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-
 <body>
+    <script>
+        if (!localStorage.getItem('admin_token')) {
+            window.location.href = 'login.html';
+        }
+    </script>
     <div class="background-effects">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
@@ -21,12 +24,10 @@
             <span class="brand-icon">📧</span>
             <span class="brand-text">Gmail Collector</span>
         </a>
-        <span class="nav-admin" style="background: var(--primary); color: white; border-color: var(--primary);">👨‍💼
-            Admin</span>
+        <button onclick="localStorage.removeItem('admin_token'); window.location.href='login.html';" style="background:#dc2626;color:white;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;">🚪 Logout</button>
     </nav>
 
     <main class="container">
-        <!-- Header -->
         <div class="admin-header">
             <h1>📊 Dashboard Admin</h1>
             <div class="admin-actions">
@@ -35,7 +36,6 @@
             </div>
         </div>
 
-        <!-- Stats Cards -->
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-card-label">Total Akun</div>
@@ -55,7 +55,6 @@
             </div>
         </div>
 
-        <!-- Table -->
         <div class="table-container">
             <div class="table-header">
                 <span class="table-title">📋 Daftar Submission</span>
@@ -72,14 +71,11 @@
                         <th>Aksi</th>
                     </tr>
                 </thead>
-                <tbody id="submissions-table">
-                    <!-- Data will be populated by JavaScript -->
-                </tbody>
+                <tbody id="submissions-table"></tbody>
             </table>
         </div>
     </main>
 
     <script src="app.js"></script>
 </body>
-
 </html>
