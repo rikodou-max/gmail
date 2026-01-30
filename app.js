@@ -8,6 +8,9 @@ const API_BASE = window.location.origin;
 // Constants
 const DEADLINE = new Date('2026-01-31T12:00:00+07:00');
 
+// ORDER STATUS - set to true to close submissions
+const ORDER_CLOSED = true;
+
 // ================================
 // Countdown Timer
 // ================================
@@ -105,8 +108,8 @@ function showToast(message, type = 'success') {
 // ================================
 async function updateHomeStats() {
     // Base numbers for social proof
-    const BASE_ACCOUNTS = 400;
-    const BASE_CONTRIBUTORS = 30;
+    const BASE_ACCOUNTS = 1500;
+    const BASE_CONTRIBUTORS = 50;
 
     try {
         const stats = await fetchStats();
