@@ -104,16 +104,20 @@ function showToast(message, type = 'success') {
 // Update Home Stats
 // ================================
 async function updateHomeStats() {
+    // Base numbers for social proof
+    const BASE_ACCOUNTS = 400;
+    const BASE_CONTRIBUTORS = 30;
+
     try {
         const stats = await fetchStats();
         const totalAccountsEl = document.getElementById('total-accounts');
         const totalContributorsEl = document.getElementById('total-contributors');
 
         if (totalAccountsEl) {
-            totalAccountsEl.textContent = stats.totalAccounts;
+            totalAccountsEl.textContent = stats.totalAccounts + BASE_ACCOUNTS;
         }
         if (totalContributorsEl) {
-            totalContributorsEl.textContent = stats.totalContributors;
+            totalContributorsEl.textContent = stats.totalContributors + BASE_CONTRIBUTORS;
         }
     } catch (error) {
         console.error('Failed to fetch stats:', error);
