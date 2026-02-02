@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gmail Collector - Lowongan Kerja Mudah</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-effects">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="brand-icon">📧</span>
+            <span class="brand-text">Gmail Collector</span>
+        </div>
+        <a href="admin.html" class="nav-admin">Admin</a>
+    </nav>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="badge">💼 Lowongan Pekerjaan</div>
+            <h1>Cari Uang dengan <span class="gradient-text">Mudah Banget!</span></h1>
+            <p class="hero-subtitle">Cukup buat akun Gmail, setor ke kami, dan dapatkan uang langsung!</p>
+
+            <!-- Countdown Timer -->
+            <div class="countdown-container">
+                <div class="countdown-label">⏰ Deadline dalam:</div>
+                <div class="countdown" id="countdown">
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="hours">00</span>
+                        <span class="countdown-unit">Jam</span>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="minutes">00</span>
+                        <span class="countdown-unit">Menit</span>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="seconds">00</span>
+                        <span class="countdown-unit">Detik</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-button" style="background: #666; cursor: not-allowed; opacity: 0.8;">
+                <span>🔒 KUOTA PENUH - ORDER CLOSED</span>
+            </div>
+        </section>
+
+        <!-- Info Cards -->
+        <section class="info-section">
+            <h2>Cara Kerjanya</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">📱</div>
+                    <h3>1. Buat Akun Gmail</h3>
+                    <p>Buat akun Gmail baru di HP kamu. Username bebas, tapi password HARUS sesuai format.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔐</div>
+                    <h3>2. Gunakan Password Ini</h3>
+                    <p class="password-display">Pemabukgoogle2026</p>
+                    <p>Password wajib sama persis!</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📤</div>
+                    <h3>3. Setor ke Kami</h3>
+                    <p>Isi form submission dengan email Gmail yang sudah dibuat.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💰</div>
+                    <h3>4. Terima Bayaran</h3>
+                    <p>Rp 4.000 per akun! Bayaran via e-wallet atau cash.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing -->
+        <section class="pricing-section">
+            <div class="pricing-card">
+                <div class="price-tag">
+                    <span class="currency">Rp</span>
+                    <span class="amount">4.000</span>
+                    <span class="per">/akun</span>
+                </div>
+                <ul class="benefits">
+                    <li>✅ Pembayaran langsung setelah verifikasi</li>
+                    <li>✅ Semua e-wallet diterima (OVO, GoPay, DANA, dll)</li>
+                    <li>✅ Cash juga bisa!</li>
+                    <li>✅ Tidak ada batasan jumlah akun</li>
+                </ul>
+                <div class="cta-button secondary" style="background: #666; cursor: not-allowed;">🔒 KUOTA PENUH</div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="stats-section">
+            <div class="stat-item">
+                <span class="stat-value" id="total-accounts">0</span>
+                <span class="stat-label">Akun Terkumpul</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-value" id="total-contributors">0</span>
+                <span class="stat-label">Kontributor</span>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Gmail Collector. Deadline: <strong>31 Januari 2026, 12:00 WIB</strong></p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

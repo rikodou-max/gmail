@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Akun - Gmail Collector</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-effects">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">
+            <span class="brand-icon">📧</span>
+            <span class="brand-text">Gmail Collector</span>
+        </a>
+    </nav>
+
+    <main class="container">
+        <div class="form-container">
+            <div class="form-card">
+                <div style="text-align: center; margin-bottom: 24px;">
+                    <div style="font-size: 48px; margin-bottom: 12px;">💰</div>
+                    <h2 class="form-title">SUBMIT AKUN GMAIL</h2>
+                    <p class="form-subtitle">Dapatkan <strong style="color: #22c55e;">Rp 2.000</strong> per akun yang
+                        valid!</p>
+                </div>
+
+                <div
+                    style="background: rgba(34,197,94,0.2); border: 1px solid #22c55e; border-radius: 12px; padding: 16px; margin-bottom: 24px; text-align: center;">
+                    <div style="font-size: 24px; font-weight: bold; color: #22c55e;">🔥 ORDER DIBUKA KEMBALI!</div>
+                    <div style="color: #888; margin-top: 8px;">Rp 2.000 / akun valid</div>
+                </div>
+
+                <form id="submitForm" class="submit-form">
+                    <div class="form-group">
+                        <label for="email">Email Gmail</label>
+                        <input type="email" id="email" name="email" placeholder="contoh@gmail.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="text" id="password" name="password" placeholder="Password akun" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contributor">Nama Kontributor</label>
+                        <input type="text" id="contributor" name="contributor" placeholder="Nama Anda" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="payment">No. E-Wallet (DANA/OVO/GoPay)</label>
+                        <input type="text" id="payment" name="payment" placeholder="08xxxxxxxxxx" required>
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <span>📤 Submit Akun</span>
+                    </button>
+                </form>
+
+                <div
+                    style="margin-top: 20px; padding: 12px; background: rgba(59,130,246,0.1); border-radius: 8px; text-align: center;">
+                    <small style="color: #60a5fa;">💡 Pembayaran akan dikirim setelah akun diverifikasi valid</small>
+                </div>
+
+                <a href="index.html" class="back-link" style="display: block; text-align: center; margin-top: 16px;">←
+                    Kembali ke Beranda</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

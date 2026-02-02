@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Gmail Collector</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <script>
+        // Check login status
+        if (!localStorage.getItem('admin_token')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+    <div class="background-effects">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">
+            <span class="brand-icon">📧</span>
+            <span class="brand-text">Gmail Collector</span>
+        </a>
+        <span class="nav-admin" style="background: var(--primary); color: white; border-color: var(--primary);">👨‍💼
+            Admin</span>
+    </nav>
+
+    <main class="container">
+        <!-- Header -->
+        <div class="admin-header">
+            <h1>📊 Dashboard Admin</h1>
+            <div class="admin-actions">
+                <button class="btn btn-outline" id="export-data">📥 Export CSV</button>
+                <button class="btn btn-danger" id="clear-all">🗑️ Hapus Semua</button>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-card-label">Total Akun</div>
+                <div class="stat-card-value primary" id="stat-total">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-card-label">Sudah Dibayar</div>
+                <div class="stat-card-value success" id="stat-paid">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-card-label">Belum Dibayar</div>
+                <div class="stat-card-value warning" id="stat-unpaid">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-card-label">Total Pembayaran</div>
+                <div class="stat-card-value accent" id="stat-payout">Rp 0</div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-container">
+            <div class="table-header">
+                <span class="table-title">📋 Daftar Submission</span>
+                <input type="text" class="search-box" id="search-box" placeholder="🔍 Cari nama, email...">
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Email Gmail</th>
+                        <th>E-Wallet</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="submissions-table">
+                    <!-- Data will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
