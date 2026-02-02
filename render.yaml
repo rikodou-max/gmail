@@ -3,7 +3,6 @@ services:
     name: gmail-collector
     runtime: node
     region: singapore
-    rootDir: server
     buildCommand: npm install
     startCommand: npm start
     envVars:
