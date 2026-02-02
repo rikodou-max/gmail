@@ -1,30 +1,21 @@
 const express = require('express');
 const cors = require('cors');
-const fs = require('fs');
 const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Data file path
-const DATA_FILE = path.join(__dirname, 'data.json');
+// In-memory data storage (Render free tier has read-only filesystem)
+let appData = { submissions: [], nextId: 1 };
 
-// Initialize data file if not exists
-function initDataFile() {
-    if (!fs.existsSync(DATA_FILE)) {
-        fs.writeFileSync(DATA_FILE, JSON.stringify({ submissions: [], nextId: 1 }));
-    }
-}
-
-// Read data from file
+// Read data from memory
 function readData() {
-    initDataFile();
-    return JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
+    return appData;
 }
 
-// Write data to file
+// Write data to memory
 function writeData(data) {
-    fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
+    appData = data;
 }
 
 // Middleware
