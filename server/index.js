@@ -5,17 +5,68 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// In-memory data storage (Render free tier has read-only filesystem)
-let appData = { submissions: [], nextId: 1 };
+// JSONBin.io Configuration
+const JSONBIN_API_KEY = process.env.JSONBIN_API_KEY || '$2a$10$YOUR_API_KEY_HERE';
+const JSONBIN_BIN_ID = process.env.JSONBIN_BIN_ID || '';
 
-// Read data from memory
+// In-memory cache (synced with JSONBin)
+let appData = { submissions: [], nextId: 1 };
+let isInitialized = false;
+
+// Initialize data from JSONBin
+async function initializeData() {
+    if (isInitialized) return;
+
+    if (!JSONBIN_BIN_ID || JSONBIN_BIN_ID === '') {
+        console.log('⚠️ JSONBIN_BIN_ID not set - using in-memory storage');
+        isInitialized = true;
+        return;
+    }
+
+    try {
+        const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`, {
+            headers: {
+                'X-Master-Key': JSONBIN_API_KEY
+            }
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            appData = result.record || { submissions: [], nextId: 1 };
+            console.log('✅ Data loaded from JSONBin.io');
+        }
+    } catch (error) {
+        console.log('⚠️ Failed to load from JSONBin, using default data:', error.message);
+    }
+
+    isInitialized = true;
+}
+
+// Read data from cache
 function readData() {
     return appData;
 }
 
-// Write data to memory
-function writeData(data) {
+// Write data to cache and sync to JSONBin
+async function writeData(data) {
     appData = data;
+
+    // Sync to JSONBin in background
+    if (JSONBIN_BIN_ID && JSONBIN_BIN_ID !== '') {
+        try {
+            await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Master-Key': JSONBIN_API_KEY
+                },
+                body: JSON.stringify(data)
+            });
+            console.log('✅ Data synced to JSONBin.io');
+        } catch (error) {
+            console.log('⚠️ Failed to sync to JSONBin:', error.message);
+        }
+    }
 }
 
 // Middleware
@@ -72,7 +123,7 @@ app.get('/api/stats', (req, res) => {
 });
 
 // Add new submission
-app.post('/api/submissions', (req, res) => {
+app.post('/api/submissions', async (req, res) => {
     try {
         const { name, email, wallet } = req.body;
 
@@ -105,7 +156,7 @@ app.post('/api/submissions', (req, res) => {
 
         data.submissions.unshift(newSubmission);
         data.nextId++;
-        writeData(data);
+        await writeData(data);
 
         res.json({
             success: true,
@@ -118,7 +169,7 @@ app.post('/api/submissions', (req, res) => {
 });
 
 // Toggle payment status
-app.patch('/api/submissions/:id/toggle-paid', (req, res) => {
+app.patch('/api/submissions/:id/toggle-paid', async (req, res) => {
     try {
         const id = parseInt(req.params.id);
         const data = readData();
@@ -129,7 +180,7 @@ app.patch('/api/submissions/:id/toggle-paid', (req, res) => {
         }
 
         submission.paid = !submission.paid;
-        writeData(data);
+        await writeData(data);
 
         res.json({
             success: true,
@@ -142,13 +193,13 @@ app.patch('/api/submissions/:id/toggle-paid', (req, res) => {
 });
 
 // Delete submission
-app.delete('/api/submissions/:id', (req, res) => {
+app.delete('/api/submissions/:id', async (req, res) => {
     try {
         const id = parseInt(req.params.id);
         const data = readData();
 
         data.submissions = data.submissions.filter(s => s.id !== id);
-        writeData(data);
+        await writeData(data);
 
         res.json({ success: true, message: 'Submission berhasil dihapus' });
     } catch (error) {
@@ -157,9 +208,9 @@ app.delete('/api/submissions/:id', (req, res) => {
 });
 
 // Delete all submissions
-app.delete('/api/submissions', (req, res) => {
+app.delete('/api/submissions', async (req, res) => {
     try {
-        writeData({ submissions: [], nextId: 1 });
+        await writeData({ submissions: [], nextId: 1 });
         res.json({ success: true, message: 'Semua data berhasil dihapus' });
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -171,14 +222,20 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-// Start server
-app.listen(PORT, () => {
-    console.log('');
-    console.log('🚀 Gmail Collector Server Running!');
-    console.log('================================');
-    console.log(`📍 Local:    http://localhost:${PORT}`);
-    console.log(`📊 Admin:    http://localhost:${PORT}/admin.html`);
-    console.log(`📝 Submit:   http://localhost:${PORT}/submit.html`);
-    console.log('================================');
-    console.log('');
-});
+// Start server with initialization
+async function startServer() {
+    await initializeData();
+
+    app.listen(PORT, () => {
+        console.log('');
+        console.log('🚀 Gmail Collector Server Running!');
+        console.log('================================');
+        console.log(`📍 Local:    http://localhost:${PORT}`);
+        console.log(`📊 Admin:    http://localhost:${PORT}/admin.html`);
+        console.log(`📝 Submit:   http://localhost:${PORT}/submit.html`);
+        console.log('================================');
+        console.log('');
+    });
+}
+
+startServer();
