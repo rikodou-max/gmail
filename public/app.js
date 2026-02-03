@@ -131,51 +131,63 @@ async function updateHomeStats() {
 // Form Handling (Submit Page)
 // ================================
 function initSubmitForm() {
-    const form = document.getElementById('submit-form');
+    // Try both form IDs for compatibility
+    const form = document.getElementById('submitForm') || document.getElementById('submit-form');
     if (!form) return;
 
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
 
-        const submitBtn = form.querySelector('.submit-btn');
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Menyimpan...';
+        const submitBtn = form.querySelector('button[type="submit"]') || form.querySelector('.submit-btn') || form.querySelector('.btn-submit');
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Menyimpan...';
+        }
 
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const wallet = document.getElementById('wallet').value.trim();
-
-        // Clear errors
-        clearErrors();
+        // Get values with fallback for different field names
+        const name = (document.getElementById('contributor') || document.getElementById('name'))?.value?.trim() || '';
+        const email = document.getElementById('email')?.value?.trim() || '';
+        const wallet = (document.getElementById('payment') || document.getElementById('wallet'))?.value?.trim() || '';
 
         try {
             const result = await addSubmission({ name, email, wallet });
 
             if (result.error) {
-                if (result.error.includes('gmail')) {
-                    showError('email', result.error);
-                } else if (result.error.includes('Email')) {
-                    showError('email', result.error);
-                } else {
-                    showToast(result.error, 'error');
+                showToast(result.error, 'error');
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<span>📤 Submit Akun</span>';
                 }
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Setor Akun 🚀';
                 return;
             }
 
             // Show success
-            document.getElementById('submit-form').style.display = 'none';
-            document.querySelector('.success-message').classList.add('show');
             showToast('Akun berhasil disetor! 🎉');
+            form.reset();
+
+            // Try to show success message if exists
+            const successMsg = document.querySelector('.success-message');
+            if (successMsg) {
+                form.style.display = 'none';
+                successMsg.classList.add('show');
+            }
+
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<span>📤 Submit Akun</span>';
+            }
 
         } catch (error) {
+            console.error('Submit error:', error);
             showToast('Gagal menyimpan data. Coba lagi.', 'error');
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Setor Akun 🚀';
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<span>📤 Submit Akun</span>';
+            }
         }
     });
 }
+
 
 function showError(fieldId, message) {
     const group = document.getElementById(fieldId).closest('.form-group');
